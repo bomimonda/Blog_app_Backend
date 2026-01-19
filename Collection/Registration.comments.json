@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "691468de911bc46125200c06"
+  },
+  "postid": {
+    "$oid": "69146853911bc46125200bfc"
+  },
+  "userid": {
+    "$oid": "6914680a911bc46125200bf4"
+  },
+  "Comments": "goog pic",
+  "userName": "Ali",
+  "Image": "https://res.cloudinary.com/dalzcsdsz/image/upload/v1762945223/e3hozeiqaw6fscgtpwna.png",
+  "Time": "16:0 PM",
+  "createdAt": {
+    "$date": "2025-11-12T11:00:46.835Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T11:00:46.835Z"
+  },
+  "__v": 0
+}]

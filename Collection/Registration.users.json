@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "6914680a911bc46125200bf4"
+  },
+  "Image": "https://res.cloudinary.com/dalzcsdsz/image/upload/v1762950563/w67btdsvcdyepbbomsdk.png",
+  "checked": "Not",
+  "skills": [
+    "Html,CSS,JS,React.js"
+  ],
+  "Username": "Ali",
+  "email": "aee@gmail.com",
+  "Title": "Software engineer",
+  "Location": "Lahore Cantt",
+  "Phone": "031220202020020",
+  "Organization": "Home",
+  "password": "$2b$10$Nf1OY2tPrU9Ar3m7aORAJuqNW3YTDu4k.TGhyacoNPlrCNVCKTY1C",
+  "__v": 0
+}]
