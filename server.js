@@ -7,7 +7,12 @@ import route from "./Routes/Router.js";
  dotenv.config();
 let app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin: "*", // or your frontend URL e.g. "https://my-frontend.vercel.app"
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 
 
 let port=process.env.PORT
