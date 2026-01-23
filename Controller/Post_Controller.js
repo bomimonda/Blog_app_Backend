@@ -2,15 +2,16 @@ import posts from "../Model/Blogpost.js";
 import users from "../Model/RegistrationSchema.js"
 import Likes from "../Model/Likes.js"
 import redisClient from "../redisclient.js";
-import { v2 as cloudinary } from "cloudinary";
-import { log } from "node:console";
+import cloudinary from "../config/cloudinary.js";
+import streamifier from "streamifier";
 
 
-cloudinary.config({
-  cloud_name: "dalzcsdsz",
-  api_key: "321475811611578",
-  api_secret: "KK-r3-HL3V3fzm_NDDKkY6vzxQI", // Click 'View API Keys' above to copy your API secret
-});
+
+// cloudinary.config({
+//   cloud_name: "dalzcsdsz",
+//   api_key: "321475811611578",
+//   api_secret: "KK-r3-HL3V3fzm_NDDKkY6vzxQI", // Click 'View API Keys' above to copy your API secret
+// });
 
 export let UserBlog = async (req, res) => {
   try {
@@ -136,18 +137,35 @@ export const AllBlog=async(req,res)=>{
 export const setimage=async(req,res)=>{
   console.log("file");
   console.log(req.file);
- if (req.file!==undefined) {
+  
+    let imageUrl = "Not";
+ if (req.file) {
+  console.log(process.env.api_key);
+  
+    const result = await new Promise((resolve, reject) => {
+         const stream = cloudinary.uploader.upload_stream(
+           { folder: "Home" },
+           (error, result) => {
+             if (error) reject(error);
+             else resolve(result);
+           }
+         );
    
-  let path1=req.file.path
-  // let{email,Username}=req.body
-    let result=await cloudinary.uploader.upload(path1)
-   console.log(result.secure_url);
+         streamifier.createReadStream(req.file.buffer).pipe(stream);
+       });
+      
+
+      imageUrl = result.secure_url;
+  // let path1=req.file.path
+  // // let{email,Username}=req.body
+  //   let result=await cloudinary.uploader.upload(path1)
+  //  console.log(result.secure_url);
   // console.log(req.file);
     const { Username, email, password,checked ,Image,Title,Location,Phone,Organization,skills} = req.body;
   console.log(req.body);
   let date=new Date()
 
-  let a=await users.updateOne({email:email},{$set:{Image:result.secure_url,Username:Username,Title:Title,Phone:Phone,Location:Location,Organization:Organization,checked:checked,skills:skills}})
+  let a=await users.updateOne({email:email},{$set:{Image:imageUrl,Username:Username,Title:Title,Phone:Phone,Location:Location,Organization:Organization,checked:checked,skills:skills}})
     if (a!==null) {
       res.status(200).json({
           success: true,

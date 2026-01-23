@@ -1,10 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config(); // 👈 FIRST LINE
+import { v2 as cloudinary } from "cloudinary";
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors"
-import dotenv from "dotenv";
-import User from "./Model/RegistrationSchema.js";
+import cors from "cors";
 import route from "./Routes/Router.js";
- dotenv.config();
+// import cloudinary from "./config/cloudinary.js";
+//  dotenv.config();
 let app = express();
 app.use(express.json());
 app.use(cors({
@@ -13,13 +15,18 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-
+cloudinary.config({
+  cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+  api_key:process.env.CLOUDINARY_API_KEY,
+  api_secret:process.env.CLOUDINARY_API_SECRET,
+});
 
 let port=process.env.PORT
 
 let Url=process.env.MONGODB_URI
 
 
+// console.log("API KEY:", cloudinary.config().api_key);
 
 
 

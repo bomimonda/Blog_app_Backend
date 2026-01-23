@@ -23,27 +23,30 @@ import { Singeluser } from "../Controller/Singeluser.js";
 let route = express.Router();
 import { UserBlog } from "../Controller/Post_Controller.js";
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    console.log("file222");
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     console.log("file222");
 
-    console.log(file);
-    cb(null, "./Images");
-  },
-  filename: function (req, file, cb) {
-    console.log(file);
+//     console.log(file);
+//     cb(null, "./Images");
+//   },
+//   filename: function (req, file, cb) {
+//     console.log(file);
 
-    crypto.randomBytes(12, (err, bytes) => {
-      let fn = bytes.toString("hex") + path.extname(file.originalname);
-      console.log("fn");
+//     crypto.randomBytes(12, (err, bytes) => {
+//       let fn = bytes.toString("hex") + path.extname(file.originalname);
+//       console.log("fn");
 
-      console.log(fn);
+//       console.log(fn);
 
-      cb(null, fn);
-    });
-    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-  },
-});
+//       cb(null, fn);
+//     });
+//     // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//   },
+// });
+
+const storage = multer.memoryStorage();
+export const upload = multer({ storage: storage });
 
 
 
@@ -53,7 +56,7 @@ import { password } from "../Controller/Password.js";
 import { Alluser } from "../Controller/Userfind.js";
 import { PostDelete } from "../Controller/Postdelete.js";
 
-const upload = multer({ storage: storage });
+
 
 route.post("/", Getuser);
 route.post("/postdelete", PostDelete);
